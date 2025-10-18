@@ -532,5 +532,315 @@ The digit `2` or `4` makes it invalid for base 2.
 - `bin()`, `oct()`, and `hex()` always return **strings**, not numbers.
 
 ---
+# ⚙️ Numbers in Depth — Bitwise Operators & Random Module
+
+---
+
+## 📘 Notes / Explanation
+
+Python supports **bitwise operations** on integers —  
+they allow direct manipulation of **binary bits** (0s and 1s).  
+These are extremely fast and used in **low-level logic, encryption, and performance-critical code**.
+
+---
+
+## 🔹 Bitwise Operators in Python
+
+| Operator | Symbol | Description | Example |
+|-----------|---------|--------------|----------|
+| AND | `&` | Sets each bit to 1 if both bits are 1 | `a & b` |
+| OR | `|` | Sets each bit to 1 if either bit is 1 | `a | b` |
+| XOR | `^` | Sets each bit to 1 if bits are different | `a ^ b` |
+| NOT | `~` | Inverts all bits (1→0, 0→1) | `~a` |
+| Left Shift | `<<` | Shifts bits left (adds zeros on right) | `a << 1` |
+| Right Shift | `>>` | Shifts bits right (drops rightmost bits) | `a >> 1` |
+
+---
+
+## 💻 Code Example
+
+```python
+a = 10   # 1010 in binary
+b = 4    # 0100 in binary
+
+print("a & b =", a & b)   # 0000 → 0
+print("a | b =", a | b)   # 1110 → 14
+print("a ^ b =", a ^ b)   # 1110 → 14
+print("~a =", ~a)         # -(a+1) → -11
+print("a << 1 =", a << 1) # 10100 → 20
+print("a >> 2 =", a >> 2) # 10 → 2
+```
+
+---
+
+## 🧠 Dry Run / Step-by-Step Bit Representation
+
+| Operation | Binary Expression | Result (Binary) | Decimal |
+|------------|------------------|-----------------|----------|
+| `a & b` | 1010 & 0100 | 0000 | 0 |
+| `a | b` | 1010 \| 0100 | 1110 | 14 |
+| `a ^ b` | 1010 ^ 0100 | 1110 | 14 |
+| `~a` | ~1010 | -1011 | -11 |
+| `a << 1` | 1010 → 10100 | 20 |
+| `a >> 2` | 1010 → 10 | 2 |
+
+---
+
+## 💡 Key Points
+
+- `~a` returns `-(a + 1)` because of **two’s complement** representation.  
+- Bitwise operations only work on **integers**.  
+- Shifting left (`<<`) multiplies by 2, shifting right (`>>`) divides by 2 (integer division).
+
+---
+
+## 🚀 Pro Tips
+
+- Use `bin()`, `oct()`, or `hex()` to visualize bitwise results:
+  ```python
+  bin(10 & 4)  # '0b0'
+  bin(10 | 4)  # '0b1110'
+  ```
+- Useful in compression algorithms, masking, and permissions logic (like file access modes).
+
+---
+
+# 🎲 Random Module — Generating Random Values
+
+---
+
+## 📘 Notes / Explanation
+
+Python provides the `random` module for generating **pseudo-random numbers**.  
+These are not truly random but sufficient for simulations, games, and testing.
+
+---
+
+## 💻 Common Random Functions
+
+```python
+import random
+
+print(random.random())        # Random float between 0 and 1
+print(random.randint(1, 10))  # Random integer between 1 and 10
+print(random.randrange(0, 50, 5))  # Random number from range (0, 5, 10, 15...)
+print(random.choice(['chai', 'code', 'python']))  # Random element from list
+print(random.uniform(1.5, 5.5))  # Random float between 1.5 and 5.5
+```
+
+---
+
+## 🧠 Dry Run / Output Example
+
+| Function | Example Call | Possible Output | Description |
+|-----------|---------------|----------------|--------------|
+| `random.random()` | — | `0.78329` | Float between 0 and 1 |
+| `random.randint(1,10)` | — | `7` | Inclusive random integer |
+| `random.randrange(0,50,5)` | — | `25` | Random multiple of 5 under 50 |
+| `random.choice([...])` | — | `'code'` | Random element |
+| `random.uniform(1.5,5.5)` | — | `3.76` | Random float in range |
+
+---
+
+## 💡 Key Takeaways
+
+- 🎲 `random` gives **pseudo-random** values (same seed → same sequence).  
+- 🔁 Use `random.seed()` to fix randomness for reproducibility.  
+- 🧮 Works for floats, ints, ranges, and lists.  
+- ⚙️ Avoid `random` for cryptography — use `secrets` module instead.
+
+---
+
+## 🚀 Pro Tips
+
+- Fix a seed for reproducible test results:
+  ```python
+  random.seed(10)
+  print(random.random())  # Always same value for same seed
+  ```
+- Combine `random.shuffle()` to randomize lists:
+  ```python
+  items = [1, 2, 3, 4]
+  random.shuffle(items)
+  print(items)
+  ```
+- For cryptographically secure randoms → use:
+  ```python
+  import secrets
+  secrets.token_hex(8)
+  ```
+
+---
+
+# 🔢 Numbers in Depth — Set Operations & Boolean Type
+
+---
+
+## 📘 Notes / Explanation
+
+### 🔹 Sets in Python
+
+Sets are **unordered collections** of **unique elements**.  
+They’re ideal when you need to store values without duplicates and perform mathematical set operations easily.
+
+---
+
+## 💻 Creating Sets
+
+```python
+setone = {1, 2, 3, 4}
+```
+
+✅ Duplicates are automatically removed, and order is not preserved.
+
+### 🧠 Example:
+```python
+setone = {1, 2, 3, 4}
+settwo = {1, 3, 7}
+```
+
+---
+
+## 🔹 Common Set Operations
+
+| Operation | Symbol | Example Code | Result |
+|------------|----------|--------------|---------|
+| Intersection | `&` | `setone & {1, 3}` | `{1, 3}` |
+| Union | `\|` | `setone \| {1, 3}` | `{1, 2, 3, 4}` |
+| Extended Union | `\|` | `setone \| {1, 3, 7}` | `{1, 2, 3, 4, 7}` |
+| Difference | `-` | `setone - {1, 2, 3, 4}` | `set()` (empty set) |
+
+---
+
+## 🔹 Empty Set vs Dictionary
+
+⚠️ This is a common beginner mistake!
+
+```python
+setone = {}
+print(type(setone))   # <class 'dict'>
+```
+
+✅ To create an **empty set**, always use:
+```python
+setone = set()
+print(type(setone))   # <class 'set'>
+```
+
+🧩 `{}` creates an empty dictionary, not a set.
+
+---
+
+## 🧠 Dry Run / Step-by-Step Execution
+
+| Step | Code | Output | Explanation |
+|------|------|---------|-------------|
+| 1️⃣ | `setone & {1, 3}` | `{1, 3}` | Common elements |
+| 2️⃣ | `setone \| {1, 3, 7}` | `{1, 2, 3, 4, 7}` | Combines unique items |
+| 3️⃣ | `setone - {1, 2, 3, 4}` | `set()` | Difference = empty |
+| 4️⃣ | `type({})` | `<class 'dict'>` | `{}` defaults to dict type |
+
+---
+
+## 💡 Key Takeaways
+
+- Sets are **unordered**, **mutable**, and contain **unique values**.  
+- `{}` creates a dictionary, not a set — use `set()` for empty sets.  
+- Use `&`, `\|`, and `-` for **intersection**, **union**, and **difference** respectively.
+
+---
+
+## 🚀 Pro Tips
+
+- Use set operations for quick **membership testing**:
+  ```python
+  if 3 in setone:
+      print("Found!")
+  ```
+- Convert lists to sets to remove duplicates:
+  ```python
+  nums = [1, 2, 2, 3]
+  unique_nums = set(nums)
+  print(unique_nums)  # {1, 2, 3}
+  ```
+
+---
+
+# 🧮 Boolean Type in Python
+
+---
+
+## 📘 Notes / Explanation
+
+Python’s `bool` type represents **True** or **False** values —  
+these are actually **subclasses of int**!
+
+```python
+type(True)   # <class 'bool'>
+type(False)  # <class 'bool'>
+```
+
+---
+
+## 💻 Boolean and Integer Relationship
+
+```python
+True == 1    # True
+False == 0   # True
+True is 1    # False (different objects)
+```
+
+🧠 Explanation:
+- `==` compares **values**,  
+- `is` compares **object identity** in memory.
+
+That’s why `True == 1` ✅ but `True is 1` ❌
+
+---
+
+## 🔹 Arithmetic with Booleans
+
+Since `bool` is a subclass of `int`, you can perform math with it.
+
+```python
+True + 4    # 5
+False + 10  # 10
+```
+
+✅ Because `True` → `1` and `False` → `0`
+
+---
+
+## 🧠 Dry Run / Step-by-Step Execution
+
+| Step | Code | Output | Explanation |
+|------|------|---------|-------------|
+| 1️⃣ | `type(True)` | `<class 'bool'>` | Boolean type |
+| 2️⃣ | `True == 1` | `True` | Same numeric value |
+| 3️⃣ | `False == 0` | `True` | Same numeric value |
+| 4️⃣ | `True is 1` | `False` | Not same object |
+| 5️⃣ | `True + 4` | `5` | `True` → 1 |
+
+---
+
+## 💡 Key Takeaways
+
+- `bool` is a subclass of `int` — behaves like numbers (1 and 0).  
+- `True == 1` and `False == 0`, but `True is 1` → ❌ False.  
+- Booleans can be used in arithmetic and conditions interchangeably.  
+
+---
+
+## 🚀 Pro Tips
+
+- Use booleans directly in calculations for conditional counts:
+  ```python
+  values = [True, False, True]
+  print(sum(values))  # 2 (counts True as 1)
+  ```
+- Avoid using `is` for value comparison; use `==` instead.
+
+---
+
 
 
