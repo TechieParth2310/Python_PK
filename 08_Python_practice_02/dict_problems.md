@@ -1,4 +1,4 @@
-# & Loops on Dictionary with Lists — Practical Coding Use 🧠  
+#  Loops on Dictionary with Lists — Practical Coding Use 🧠  
 
 ## 🧩 Topic: Finding Majority Element (List + Dictionary Combo)
 
