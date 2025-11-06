@@ -1,15 +1,20 @@
 # Majority Element
-array = list(map(int, input().split()))
+
+arr = list(map(int,input().split()))
+n = len(arr)
 freq = {}
-ans = -1
-N = len(array)
 
-for num in array:
-    freq[num] = freq.get(num, 0) + 1   # fix 1
+for num in arr:
+    if num in freq:
+        freq[num] +=1
+    else:
+        freq[num] =1
 
-for value in freq:
-    if freq[value] > N // 3:          
-        ans = value                    
-        break
+found = False
 
-print(ans)
+for key in freq:
+    if freq[key]> n//3:
+        print(key,end=' ')
+        found = True
+if not found:
+    print(' No Majority')

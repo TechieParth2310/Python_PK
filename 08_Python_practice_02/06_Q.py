@@ -21,3 +21,18 @@
 # (78).
 #  Top 3 printed in order: Bob, David, Alice.
 
+# Read K and N
+k, n = map(int, input().split())
+
+students = []
+for _ in range(n):
+    marks, name = input().split()
+    marks = int(marks)
+    students.append((marks, name))
+
+# Sort by marks descending, then by name ascending
+students.sort(key=lambda x: (-x[0], x[1]))
+
+# Print top K students
+for i in range(min(k, n)):
+    print(f"{students[i][1]}: {students[i][0]}")
