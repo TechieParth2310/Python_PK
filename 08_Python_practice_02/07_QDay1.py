@@ -5,4 +5,18 @@
 # because 13+53+33
 # =153.
 
+arr = list(map(int,input().split()))
+found = False
+for num in arr:
+    digits = str(num)
+    power = len(digits)
+    arm = sum(int(d)**power for d in digits)
+    if(num==arm):
+        print(num,end=" ")
+        found= True
+    
+if not found:
+    print("No armstrong Number")
+
+
 

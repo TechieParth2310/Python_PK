@@ -2,9 +2,8 @@
 
 N=int(input("Enter Count N : "))
 arr = list(map(int,input("Enter space-separated elements: ").split()))
-sum = 0 
-for num in arr:
-    sum = sum+num
-print(sum)
-total = (N*(N+1))//2
-print("Missing number: ",int(total-sum))
+
+actual_sum = (N*(N+1))/2
+given_sum = sum(arr)
+print(int(actual_sum-given_sum))
+1
